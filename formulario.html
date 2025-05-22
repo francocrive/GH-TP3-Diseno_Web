@@ -1,87 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Formulario con JavaScript</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario con JavaScript</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Formulario de Contacto con JavaScript</h1>
+    <form id="formulario">
 
-  <h1>Formulario de Contacto con JavaScript</h1>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required/> 
 
-  <form id="formulario">
-    <label for="nombre">Nombre:</label><br>
-    <input type="text" id="nombre" name="nombre" required><br><br>
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required />
 
-    <label for="email">Correo electrónico:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+      <label for="asunto">Asunto:</label>
+      <select id="asunto" name="asunto">
+        <option value="Consulta">Consulta</option>
+        <option value="Soporte">Soporte</option>
+        <option value="Otro">Otro</option>
+      </select>
 
-    <label for="asunto">Asunto:</label><br>
-    <select id="asunto" name="asunto">
-      <option value="Consulta">Consulta</option>
-      <option value="Soporte">Soporte</option>
-      <option value="Otro">Otro</option>
-    </select><br><br>
+      <label for="mensaje">Mensaje:</label>
+      <textarea name="textAreaCaracteres" id="textAreaCaracteres" rows="4" cols="40"></textarea>
+       <p>
+        Has escrito <span id="contador"></span> caracteres.
+      </p>
 
-    <label for="mensaje">Mensaje:</label><br>
-    <textarea id="mensaje" rows="4" cols="40"></textarea><br><br>
+      <div class="precio descuento">
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required/>
 
-   <div class="precio descuento"> 
-    <label for="precio">Precio:</label><br>
-    <input type="number" id="precio" name="precio" required><br><br>
+        <label for="descuento">Porcentaje de Descuento (%):</label>
+        <input
+          type="number"
+          id="descuento"
+          name="descuento"
+          required
+        />
+         <p id="respuesta"></p>
+      </div>
 
-    <label for="descuento">Porcentaje de Descuento (%):</label><br>
-    <input type="number" id="descuento" name="descuento" required><br><br>
-   </div>
-    <button type="submit">Enviar</button>
+      <button type="submit">Enviar</button>
+    </form>
+
+
+    
+    <div class="cajaColor">
+      <h2>Cambiar estilo de una caja al pasar el mouse</h2>
+      <div style="width: 200px; height: 200px;" id="caja"></div>
+    </div>
+    
+    
  
-  </form>
 
-  <p id="respuesta"></p>
 
-  <script>
-    function validarEmail(email) {
-      const regex = /\S+@\S+\.\S+/;
-      return regex.test(email);
-    }
-
-    function calcularDescuento(precio, porcentaje) {
-      return precio - (precio * porcentaje / 100);
-    }
-
-    function generarMensaje(nombre, asunto) {
-      const mensaje = `Mensaje de ${nombre} acerca de ${asunto}.`;
-      console.log(mensaje);
-    }
-
-    const formulario = document.getElementById('formulario');
-
-    formulario.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const nombre = document.getElementById('nombre').value;
-      const email = document.getElementById('email').value;
-      const asunto = document.getElementById('asunto').value;
-      const precio = parseFloat(document.getElementById('precio').value);
-      const descuento = parseFloat(document.getElementById('descuento').value);
-
-      if (!validarEmail(email)) {
-        alert("Por favor ingresa un email válido.");
-        return;
-      }
-
-      if (isNaN(precio) || isNaN(descuento) || precio < 0 || descuento < 0) {
-        alert("Por favor ingresa un precio y descuento válidos.");
-        return;
-      }
-
-      generarMensaje(nombre, asunto);
-
-      const precioFinal = calcularDescuento(precio, descuento);
-      document.getElementById('respuesta').textContent =
-        `El precio final con un descuento del ${descuento}% es $${precioFinal.toFixed(2)}.`;
-    });
-  </script>
-
-</body>
+   
+  </body>
+  <script src="./app.js"></script>
 </html>
